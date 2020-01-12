@@ -1,3 +1,5 @@
+It's a companion app to Trivial Pursuit for all the sore losers out there who always feel like the wrong guy wins it
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
