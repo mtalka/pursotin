@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.scss";
+import TeamCard from "./TeamCard";
 
 function App() {
+  const teams = ["pink", "purple", "blue", "green", "yellow", "orange"];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Pursotin</h1>
+      <h3>Just because you think you won doesn't mean you won.</h3>
+      <div className="functions">
+        <div className="function">Reset</div>
+        <div className="function">Undo</div>
+      </div>
+      {teams.map(c => (
+        <TeamCard key={c} team={c} />
+      ))}
     </div>
   );
 }
