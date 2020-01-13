@@ -24,6 +24,8 @@ export default function reducer(state = initialState, action) {
           return item;
         })
       };
+    case "RESET":
+      return initialState
     default:
       return state;
   }

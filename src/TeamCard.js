@@ -1,23 +1,30 @@
 import React from "react";
-import QuestionCounter from "./QuestionCounter";
+import { connect } from "react-redux";
+import QuestionCounter, { getTeamByName } from "./QuestionCounter";
 
 function TeamCard(props) {
-  let count = 0;
-  const cardClass = `team-card ${props.team}`;
+  const cardClass = `team-card ${props.teamColor}`;
 
   const colors = ["pink", "purple", "blue", "green", "yellow", "orange"];
 
   return (
     <div className={cardClass}>
-      <div className="team-name">{props.team}</div>
+      <div className="team-name">{props.teamColor}</div>
       <div className="counter-wrapper">
         {colors.map(c => (
-          <QuestionCounter key={c} color={c} team={props.team} />
+          <QuestionCounter key={c} color={c} team={props.teamColor} />
         ))}
       </div>
-      <div className="total">{count}</div>
+      <div className="total">{props.team.total}</div>
     </div>
   );
 }
 
-export default TeamCard;
+function mapStateToProps(state, ownProps) {
+  const team = getTeamByName(state.counts.teams, ownProps.teamColor);
+  return {
+    team
+  };
+}
+
+export default connect(mapStateToProps)(TeamCard)

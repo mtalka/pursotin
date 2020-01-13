@@ -1,31 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as countActions from "./redux/actions/countActions";
 
 function QuestionCounter(props) {
+
+  const [count, setCount] = useState(0);
+
   function increment() {
-    console.log(props.team);
+    setCount(count + 1);
     props.actions.increment(props.team);
   }
+
+  function Count() {
+    if (count === 0) {
+      return null;
+    }
+    return <div>{count}</div>
+  }
+
+  useEffect(() => {
+    if (props.team.total === 0) {
+      setCount(0)
+    }
+  }, [props.team.total]);
 
   const countClass = `count ${props.color}`;
 
   return (
     <div className="counter" onClick={increment}>
-      <div className={countClass}>{props.team.total}</div>
+      <div className={countClass}><Count /></div>
     </div>
   );
 }
 
-function getTeamByName(teams, teamName) {
+export function getTeamByName(teams, teamName) {
   const team = teams.find(t => t.team === teamName);
   return team;
 }
 
 function mapStateToProps(state, ownProps) {
   const team = getTeamByName(state.counts.teams, ownProps.team);
-  debugger;
   return {
     team
   };
