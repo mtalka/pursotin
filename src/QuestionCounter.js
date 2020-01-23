@@ -12,11 +12,25 @@ function QuestionCounter(props) {
     props.actions.increment(props.team);
   }
 
+  function decrement() {
+    if (count !== 0) {
+      setCount(count - 1);
+      props.actions.decrement(props.team);
+    }
+  }
+
   function Count() {
     if (count === 0) {
       return null;
     }
     return <div>{count}</div>
+  }
+
+  function Minus() {
+    if (count === 0) {
+      return null;
+    }
+    return <div>minus</div>
   }
 
   useEffect(() => {
@@ -28,8 +42,9 @@ function QuestionCounter(props) {
   const countClass = `count ${props.color}`;
 
   return (
-    <div className="counter" onClick={increment}>
-      <div className={countClass}><Count /></div>
+    <div className="controls">
+      <div className={countClass} onClick={increment}><Count /></div>
+      <div className="decrement" onClick={decrement}><Minus /></div>
     </div>
   );
 }
